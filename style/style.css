@@ -1,0 +1,121 @@
+
+@font-face {
+    font-family: OpenSans-Bold;
+    src: url(../fonts/open-sans-bold.ttf); <!-- Шрифт OpenSans-Bold;-->
+}
+
+
+body {
+    background: rgba(28,116,48,1);
+}
+
+
+#textContentStart{
+    position: absolute; /* Абсолютное позиционирование */
+    left: 531px;
+    top: 376px;
+    width: 219px;
+    height: 38px;
+    opacity: 0.85;
+    font-family: 'OpenSans-Bold';
+    font-size: 28px;
+    color: #FFFFFF;
+    letter-spacing: 0.2px;
+
+}
+
+a.btnStartGame {
+    position: absolute; /* Абсолютное позиционирование */
+    left: 569px;
+    top: 448px;
+    width: 144px;
+    height: 42px;
+    opacity: 0.85;
+    background: rgb(255,255,255); /* фон кнопки */
+    border-radius: 4px;
+    font-family: 'OpenSans-Bold';
+    font-size: 16px;
+    color: rgba(28,116,48,1); /* цвет текста */
+    text-align: center;
+    letter-spacing: 0;
+    text-decoration: none; /* убирать подчёркивание у ссылок */
+    user-select: none; /* убирать выделение текста */
+
+    padding: .7em 1em; /* отступ от текста */
+    outline: none; /* убирать контур в Mozilla */
+}
+a.btnStartGame:hover { background: rgba(255,255,255,1); } /* при наведении курсора мышки */
+a.btnStartGame:active { background: rgb(152,15,0); } /* при нажатии */
+
+
+#textContentAgain{
+    position: absolute; /* Абсолютное позиционирование */
+    left: 926px;
+    top: 54px;
+    width: 44px;
+    height: 19px;
+    text-align: center;
+    opacity: 0.8;
+    font-family: 'OpenSans-Bold';
+    font-size: 14px;
+    color: #FFFFFF;
+    letter-spacing: 0px;
+    line-height: 35px;
+}
+
+a.btnAgainGame {
+    position: absolute; /* Абсолютное позиционирование */
+    left: 290px;
+    top: 54px;
+    width: 134px;
+    height: 19px;
+    opacity: 0.8;
+    font-family: 'OpenSans-Bold';
+    font-size: 14px;
+    color: rgba(255,255,255,1); /* цвет текста */
+    letter-spacing: -0.25px;
+    text-decoration: none; /* убирать подчёркивание у ссылок */
+    user-select: none; /* убирать выделение текста */
+    padding: .7em 1em; /* отступ от текста */
+    outline: none; /* убирать контур в Mozilla */
+}
+
+
+#textContentEnd{
+    position: absolute; /* Абсолютное позиционирование */
+    left: 488.5px;
+    top: 358px;
+    width: 304px;
+    height: 70px;
+    text-align: center;
+    opacity: 0.85;
+    font-family: 'OpenSans-Bold';
+    font-size: 24px;
+    color: #FFFFFF;
+    letter-spacing: 0.15px;
+    line-height: 35px;
+}
+
+a.btnEndGame {
+    position: absolute; /* Абсолютное позиционирование */
+    left: 576px;
+    top: 468px;
+    width: 128px;
+    height: 42px;
+    opacity: 0.85;
+    background: rgb(255,255,255); /* фон кнопки */
+    border-radius: 4px;
+    font-family: 'OpenSans-Bold';
+    font-size: 16px;
+    color: rgba(28,116,48,1); /* цвет текста */
+    text-align: center;
+    letter-spacing: 0;
+    text-decoration: none; /* убирать подчёркивание у ссылок */
+    user-select: none; /* убирать выделение текста */
+
+    padding: .7em 1em; /* отступ от текста */
+    outline: none; /* убирать контур в Mozilla */
+}
+a.btnEndGame:hover { background: rgba(255,255,255,1); } /* при наведении курсора мышки */
+a.btnEndGame:active { background: rgb(152,15,0); } /* при нажатии */
+

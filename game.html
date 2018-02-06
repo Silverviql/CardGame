@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Page</title>
+    <!-- Bootstrap -->
+<!--    <link href="style/css/bootstrap.min.css" rel="stylesheet">-->
+    <link href="style/style.css" rel="stylesheet">
+<!--    <script src="js/jquery-1.12.0.js"></script>-->
+</head>
+
+<body>
+<script>
+    //Фунция запуска новой игры
+    function startGame() {
+        location.reload();
+    }
+
+    function changeImg() {
+
+        var rand = Math.floor(Math.random() * arr.length);
+        var elem = document.getElementById("3");
+        elem.src = cards[rand];
+
+    }
+
+ /*   function click_ot(){
+        document.images["img"].src = 'style/img/Cards/0C.png';
+    }*/
+
+
+    var maxRandomNum;
+    var randomNum;
+
+    //Массив ссылок на картинки
+    word_array = [
+        "style/img/Cards/0S.png",
+        "style/img/Cards/2C.png",
+        "style/img/Cards/2D.png"
+    ];
+
+/*    maxRandomNum = cards.id.imagelink.length - 1;*/
+    maxRandomNum = word_array.length - 1;
+
+    function getImg(){
+        randomNum = Math.round((Math.random() * (maxRandomNum - 0) + 0));
+        document.getElementById("result").src = ''  + word_array[randomNum] + '';
+    }
+
+
+
+</script>
+
+<div style="position: absolute; left: 305px; top: 74px;">
+    <table cellspacing="15">
+    
+    <tr>
+<!--        <div id="result"></div>-->
+        <td><img id="img" src="style/img/images.png" height="150" width="102" onclick="click_ot(0) " /></td>
+        <td><img id="result" src="style/img/images.png" height="150" width="102" onclick="getImg()" /></td>
+        <td><img id="3" src="style/img/images.png" height="150" width="102" onclick="changeImg(2)" /></td>
+        <td><img id="4" src="style/img/images.png" height="150" width="102" onclick="changeImg(3)" /></td>
+        <td><img id="5" src="style/img/images.png" height="150" width="102" onclick="changeImg(4)" /></td>
+        <td><img id="6" src="style/img/images.png" height="150" width="102" onclick="changeImg(5)" /></td>
+    </tr>
+    <br>
+    <tr>
+        <td><img id="7" src="style/img/images.png" height="150" width="102" onclick="changeImg(6)" /></td>
+        <td><img id="8" src="style/img/images.png" height="150" width="102" onclick="changeImg(7)" /></td>
+        <td><img id="9" src="style/img/images.png" height="150" width="102" onclick="changeImg(8)" /></td>
+        <td><img id="10" src="style/img/images.png" height="150" width="102" onclick="changeImg(9)" /></td>
+        <td><img id="11" src="style/img/images.png" height="150" width="102" onclick="changeImg(10)" /></td>
+        <td><img id="12" src="style/img/images.png" height="150" width="102" onclick="changeImg(11)" /></td>
+    </tr>
+    <br>
+    <tr>
+        <td><img id="13" src="style/img/images.png" height="150" width="102" onclick="changeImg(12)" /></td>
+        <td><img id="14" src="style/img/images.png" height="150" width="102" onclick="changeImg(13)" /></td>
+        <td><img id="15" src="style/img/images.png" height="150" width="102" onclick="changeImg(14)" /></td>
+        <td><img id="16" src="style/img/images.png" height="150" width="102" onclick="changeImg(15)" /></td>
+        <td><img id="17" src="style/img/images.png" height="150" width="102" onclick="changeImg(16)" /></td>
+        <td><img id="18" src="style/img/images.png" height="150" width="102" onclick="changeImg(17)" /></td>
+    </tr>
+</table>
+</div>
+<div id="textContentAgain" ><p>Очки: </p></div>
+
+<!--<a href="game.html" class="btnAgainGame">Начать заново</a>-->
+<a class="btnAgainGame" onClick="startGame()">Начать заново</a>
+</body>
+</html>
