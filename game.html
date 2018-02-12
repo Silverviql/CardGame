@@ -19,78 +19,19 @@
     }
 
 
-
-   /* function changeImg() {
-
-        var rand = Math.floor(Math.random() * arr.length);
-        var elem = document.getElementById("3");
-        elem.src = cards[rand];
-
-    }*/
-
- /*   function click_ot(){
-        document.images["img"].src = 'style/img/Cards/0C.png';
-    }*/
-
-
-   /* var newArrayImg = [];
-    var images = new Array[18,22, 73,55, 12];
-    var img = images;
-    for (var i = 0; i < 2; i++) {
-        var a = Math.floor(Math.random() * img.length);
-        img[a] = newArrayImg[];
-        alert( img[a] );
-    };*/
-
-
-/*
-    var images = new Array[
-        "style/img/Cards/0S.png",
-            "style/img/Cards/2C.png",
-            "style/img/Cards/2D.png",
-            "style/img/Cards/4D.png",
-            "style/img/Cards/5H.png"];
-    var img = images;
-    for (var i = 0; i < 2; i++) {
-        var a = Math.floor(Math.random() * img.length);
-        document.write ("<div class='photo'><img src ='"+img[a]+"' /></div>");
-        img.splice(a,1);
-    };
-
-
-    var arr = [1, -1, 2, -2, 3];
-    var positiveArr = arr.filter(function(number) {
-        return number > 0;
-    });
-
-    alert( positiveArr );*/
-
-
-
- /*   var maxRandomNum;
-    var randomNum;
-
-    //Массив ссылок на картинки
-    word_array = [
-        "style/img/Cards/0S.png",
-        "style/img/Cards/2C.png",
-        "style/img/Cards/2D.png"
-    ];
-
-    maxRandomNum = word_array.length - 1;
-
-    function changeImg2(){
-        randomNum = Math.round((Math.random() * (maxRandomNum - 0) + 0));
-        document.getElementById("2").src = ''  + word_array[randomNum] + '';
-    }*/
-        var img = cards;
-        function randomCard() {
-            for (var i = 0; i < 2; i++) {
-                var rand = Math.floor(Math.random() * img.length);
-            }
-            document.getElementById("rand").src = ''  + img[rand] + '';
+    //3апись 9 id в массив randId
+    var randId = new Array(9);
+    for (var i = 0; i < randId.length; i++) { // В таблице 9 строк
+        for (var j = 0; j < 9; j++) {
+            var rand = Math.floor(Math.random() * cards.length);
         }
+        randId[i] = rand ;
+    }
+    var img = cards;
 
+    function randomCard() {
+        document.getElementById("rand").src = ''  + img[randId[0]] + '';
+    }
 
 
 </script>
