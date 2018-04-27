@@ -11,65 +11,163 @@
 <!--    <script src="js/jquery-1.12.0.js"></script>-->
 </head>
 
-<body>
 <script>
     //Фунция запуска новой игры
     function startGame() {
         location.reload();
     }
 
-
     //3апись 9 id в массив randId
     var randId = new Array(9);
     for (var i = 0; i < randId.length; i++) { // В таблице 9 строк
-        for (var j = 0; j < 9; j++) {
+        var used = true;
+        while (used) {
             var rand = Math.floor(Math.random() * cards.length);
-        }
-        randId[i] = rand ;
-    }
+            used = randId.indexOf(rand) !== -1;
+             }
+                randId[i] = rand;
+     }
+
     var img = cards;
+    var gameCards = randId.slice(0,10);
 
-    function randomCard() {
-        document.getElementById("rand").src = ''  + img[randId[0]] + '';
+    console.log(gameCards);
+    gameCards =randId.concat(gameCards);
+    console.log(gameCards);
+
+    function shuffle(a) {
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+    }
+    shuffle(gameCards);
+    console.log(gameCards);
+
+    /**
+     * Promise for sleep
+     * @param {int} ms ms that should be passed
+     */
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
 
+    var points = 0;
+    var stateGame = 'cardClosed';
+    var cardOne;
+    var cardSecond;
+    var idOneCard;
+    var idSecondCard;
+    var arrLostCards = gameCards.slice(0);
 
+    async  function randomCard(id){
+        var audioFile = "sounds/card.mp3"; // 3вуковой эффект при открытие карты
+        var audio = new Audio(audioFile);
+        audio.play();
+
+        if(stateGame === 'cardClosed'){
+            document.getElementById(id).src = ''  + img[gameCards[id]] + '';
+            stateGame = 'cardOpened';
+            cardOne = gameCards[id];
+            idOneCard = id;
+            return;
+        }
+        if(stateGame === 'cardOpened'){
+            document.getElementById(id).src = ''  + img[gameCards[id]] + '';
+            cardSecond = gameCards[id];
+            idSecondCard = id;
+                if (cardOne === cardSecond){
+                    arrLostCards.splice(arrLostCards.indexOf(idOneCard), 1);
+                    arrLostCards.splice(arrLostCards.indexOf(idSecondCard), 1);
+                    points += arrLostCards.length / 2 * 42;
+                    console.log(arrLostCards );
+                    document.getElementById("points").innerHTML = points;
+/*                  document.getElementById(idOneCard).onclick =  null;      //отключение события onclick
+                    document.getElementById(idSecondCard).onclick =  null;*/
+                    await sleep(900);
+                    document.getElementById(idOneCard).style.display="none";   //Лучше оставлять карты на столе чем убирать ..
+                    document.getElementById(idSecondCard).style.display="none";
+                    stateGame ='cardClosed';
+                        if(arrLostCards.length == 0){
+                            showScore();
+                        }
+                  }
+                else {
+                    await sleep(900);
+                    console.log('А вот и неправильно!' );
+                    points -= arrLostCards.length / 2 * 42;
+                    document.getElementById("points").innerHTML = points;
+                    document.getElementById(idOneCard).src = "style/img/images.png";
+                    document.getElementById(idSecondCard).src = "style/img/images.png";
+                    stateGame ='cardClosed';
+                }
+                return;
+        }
+    }
+
+    async function showAllCards() {
+        var audioFile = "sounds/start.mp3"; // 3вуковой эффект расскладывания карт
+        var audio = new Audio(audioFile);
+        audio.play();
+        for(var i = 0; i < 18; i++){
+            document.getElementById(i).src = ''  + img[gameCards[i]] + '';
+        }
+        await sleep(5000);
+        for(var j = 0; j < 18; j++){
+            var imageBack = document.getElementById(j) ;
+            if(imageBack){
+                imageBack.src =  "style/img/images.png"; // Проверка что элемент j существует
+            }
+            else {
+                console.log('Элемент не найден');
+            }
+        }
+    }
+    async  function showScore() {
+        await sleep(3000);
+        window.open('finish.html?&'+points, "game");
+    }
 </script>
-
-<div style="position: absolute; left: 305px; top: 74px;">
+<body>
+<form target="game">
+<div data-tid="Deck" style="position: absolute; left: 305px; top: 74px;">
     <table cellspacing="15">
     
     <tr>
-        <td><img id="1" src="style/img/images.png" height="150" width="102" onclick="changeImg(0) " /></td>
-        <td><img id="rand" src="style/img/images.png" height="150" width="102" onclick="randomCard(1)" /></td>
-        <td><img id="3" src="style/img/images.png" height="150" width="102" onclick="changeImg(2)" /></td>
-        <td><img id="4" src="style/img/images.png" height="150" width="102" onclick="changeImg(3)" /></td>
-        <td><img id="5" src="style/img/images.png" height="150" width="102" onclick="changeImg(4)" /></td>
-        <td><img id="6" src="style/img/images.png" height="150" width="102" onclick="changeImg(5)" /></td>
+        <td><img id="0" src="style/img/images.png" height="150" width="102" onclick="randomCard(0) " /></td>
+        <td><img id="1" src="style/img/images.png" height="150" width="102" onclick="randomCard(1)" /></td>
+        <td><img id="2" src="style/img/images.png" height="150" width="102" onclick="randomCard(2)" /></td>
+        <td><img id="3" src="style/img/images.png" height="150" width="102" onclick="randomCard(3)" /></td>
+        <td><img id="4" src="style/img/images.png" height="150" width="102" onclick="randomCard(4)" /></td>
+        <td><img id="5" src="style/img/images.png" height="150" width="102" onclick="randomCard(5)" /></td>
     </tr>
     <br>
     <tr>
-        <td><img id="7" src="style/img/images.png" height="150" width="102" onclick="changeImg(6)" /></td>
-        <td><img id="8" src="style/img/images.png" height="150" width="102" onclick="changeImg(7)" /></td>
-        <td><img id="9" src="style/img/images.png" height="150" width="102" onclick="changeImg(8)" /></td>
-        <td><img id="10" src="style/img/images.png" height="150" width="102" onclick="changeImg(9)" /></td>
-        <td><img id="11" src="style/img/images.png" height="150" width="102" onclick="changeImg(10)" /></td>
-        <td><img id="12" src="style/img/images.png" height="150" width="102" onclick="changeImg(11)" /></td>
+        <td><img id="6" src="style/img/images.png" height="150" width="102" onclick="randomCard(6)" /></td>
+        <td><img id="7" src="style/img/images.png" height="150" width="102" onclick="randomCard(7)" /></td>
+        <td><img id="8" src="style/img/images.png" height="150" width="102" onclick="randomCard(8)" /></td>
+        <td><img id="9" src="style/img/images.png" height="150" width="102" onclick="randomCard(9)" /></td>
+        <td><img id="10" src="style/img/images.png" height="150" width="102" onclick="randomCard(10)" /></td>
+        <td><img id="11" src="style/img/images.png" height="150" width="102" onclick="randomCard(11)" /></td>
     </tr>
     <br>
     <tr>
-        <td><img id="13" src="style/img/images.png" height="150" width="102" onclick="changeImg(12)" /></td>
-        <td><img id="14" src="style/img/images.png" height="150" width="102" onclick="changeImg(13)" /></td>
-        <td><img id="15" src="style/img/images.png" height="150" width="102" onclick="changeImg(14)" /></td>
-        <td><img id="16" src="style/img/images.png" height="150" width="102" onclick="changeImg(15)" /></td>
-        <td><img id="17" src="style/img/images.png" height="150" width="102" onclick="changeImg(16)" /></td>
-        <td><img id="18" src="style/img/images.png" height="150" width="102" onclick="changeImg(17)" /></td>
+        <td><img id="12" src="style/img/images.png" height="150" width="102" onclick="randomCard(12)" /></td>
+        <td><img id="13" src="style/img/images.png" height="150" width="102" onclick="randomCard(13)" /></td>
+        <td><img id="14" src="style/img/images.png" height="150" width="102" onclick="randomCard(14)" /></td>
+        <td><img id="15" src="style/img/images.png" height="150" width="102" onclick="randomCard(15)" /></td>
+        <td><img id="16" src="style/img/images.png" height="150" width="102" onclick="randomCard(16)" /></td>
+        <td><img id="17" src="style/img/images.png" height="150" width="102" onclick="randomCard(17)" /></td>
     </tr>
 </table>
 </div>
-<div id="textContentAgain" ><p>Очки: </p></div>
-
-<!--<a href="game.html" class="btnAgainGame">Начать заново</a>-->
+<div data-tid="Menu-scores"  id="textContentAgain" >Очки: <span id="points"></span></div>
+<body onload="showAllCards();">      <!--3апуск функции при полной прогру3ке страницы-->
+<div data-tid="Menu-newGame">
 <a class="btnAgainGame" onClick="startGame()">Начать заново</a>
+</div>
+<!--<a onClick="showScore()">пока3ать очки</a>-->
+</form>
 </body>
 </html>

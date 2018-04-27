@@ -10,12 +10,28 @@
     <script src="js/jquery-1.12.0.js"></script>
     <script src="js/bootstrap.min.js"></script>
 </head>
+<script>
+    function scoreGame() {
+        var audioFile = "sounds/finish.mp3"; // 3вуковой эффект при 3авершение игры
+        var audio = new Audio(audioFile);
+        audio.play();
+        var score = decodeURIComponent(location.search.substr(1)).split('&');
+        score.splice(0, 1);
+        var result = score[0];
+        console.log(result);
+        document.getElementById("result").innerHTML = result;
+    }
 
+
+</script>
 <body>
+<form target="game">
 <div style="position: absolute; left: 382px; top: 74px;"><img src="style/img/Group 2.png"  border="0" alt="css/3.JPG" width="516" height="275"> </div>
-
-<div id="textContentEnd" ><p>Поздравляем!<br>Ваш итоговый счет: 594</p></div>
-
+<body onload="scoreGame();">      <!--3апуск функции при полной прогру3ке страницы-->
+<div id="textContentEnd" ><p>Поздравляем!<br>Ваш итоговый счет:<span id="result"></span></p></div>
+<div data-tid="EndGame-retryGame">
 <a href="game.html" class="btnEndGame">Еще раз</a>
+</div>
+</form>
 </body>
 </html>
